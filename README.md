@@ -148,31 +148,3 @@ npm run dev
 
 完整交互文档：启动后端后访问 http://127.0.0.1:8730/docs （FastAPI 自动生成）。
 
-## 面试亮点话术
-
-- **LLM 工程实践**：OpenAI 兼容协议接入 DeepSeek、`json_object` 结构化输出、
-  三重 JSON 解析兜底（裸 JSON → code fence → 花括号截取）、失败自动重试；
-- **SSE 流式 + 自研渐进解析器**：后端流式转发模型输出，前端在 JSON 未闭合时
-  通过字符级状态机（字符串/转义/深度三态）实时提取已完成字段与数组元素，
-  实现"菜名先现、描述逐字、步骤逐条"的打字机渲染，首屏反馈从 8s+ 优化到 ~2s；
-- **多模态落地**：接入 DeepSeek 视觉模型（v4-flash-vision-exp）实现拍照识别食材，
-  前端 Canvas 端侧压缩（最长边 1024 / JPEG 0.82，原图数 MB → 数百 KB）降低
-  传输与 token 成本，识别结果带置信度勾选回流；实测 5 种食材 5/5 命中、~3s 返回；
-- **Prompt Engineering**：角色设定 + 结构化要求 + 随机灵感因子 + 排除列表的组合设计；
-- **全栈能力**：FastAPI 分层架构（routers/models/schemas）、SQLAlchemy 2.0
-  Mapped 注解风格、React Hooks + Zustand 状态管理、Vite 代理跨域方案；
-- **产品质量意识**：为核心解析器编写 9 个流式中间态断言（覆盖转义/嵌套/未闭合
-  数组等边界），SSE 提供 `X-Accel-Buffering: no` 防代理缓冲。
-
-> 完整的简历项目经历、30 秒口头介绍与面试 Q&A 预演见 [简历描述.md](./简历描述.md)。
-
-## 安全说明
-
-- API Key 存放于 `backend/.env`，通过 `python-dotenv` 注入，`.gitignore` 已排除；
-- 请勿将 `.env` 提交到公开仓库，密钥泄露请及时在 DeepSeek 平台重置。
-
-## 后续可扩展方向
-
-- 接入视觉模型（如通义千问 VL / GPT-4V）实现拍照识别冰箱食材；
-- 流式输出（SSE）实现打字机效果；用户系统与多设备同步；
-- 换用 PostgreSQL + Redis（缓存食材建议类低频变化内容）支撑生产部署。
