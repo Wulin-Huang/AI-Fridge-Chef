@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background: #f7faf7;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eef2ee 25%, #e2e8e2 50%, #eef2ee 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
